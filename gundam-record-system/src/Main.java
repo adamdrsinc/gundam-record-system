@@ -1,4 +1,3 @@
-import java.io.*;
 import java.util.*;
 
 public class Main {
@@ -13,7 +12,7 @@ public class Main {
                         [2] Retrieve current records.
                         [3] Delete a record.
                         [4] Edit properties of a record.
-                        [6] Quit."""
+                        [6] Quit.Hi"""
         );
 
         checkValidMMInput();
@@ -53,9 +52,9 @@ public class Main {
 
     public static void checkValidMMInput(){
         ArrayList<GundamModel> newModels = new ArrayList<>();
-        String userInput = new String();
         List<String> validInputs = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "6"));
         Scanner scanner = new Scanner(System.in);
+        String userInput;
         while (true) {
             System.out.println();
             userInput = scanner.nextLine();
