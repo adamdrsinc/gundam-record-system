@@ -9,6 +9,8 @@ public class GundamModel implements Serializable, Comparable<GundamModel>{
     private Grade grade;
     private Series series;
 
+
+
     @Override
     public int compareTo(GundamModel o) {
         return grade.compareTo(o.grade);

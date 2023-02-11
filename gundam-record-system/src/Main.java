@@ -12,7 +12,7 @@ public class Main {
                         [2] Retrieve current records.
                         [3] Delete a record.
                         [4] Edit properties of a record.
-                        [6] Quit.Hi"""
+                        [6] Quit."""
         );
 
         checkValidMMInput();

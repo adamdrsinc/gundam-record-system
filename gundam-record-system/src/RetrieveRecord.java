@@ -7,7 +7,6 @@ import java.util.*;
 public class RetrieveRecord {
     public static ArrayList<GundamModel> retrieveRecords(){
         List<String> validInput = new ArrayList<>(Arrays.asList("1", "2", "3", "4"));
-        Scanner scanner = new Scanner(System.in);
         ArrayList<GundamModel> allRecords = getAllModels();
 
         if(getAllModels().isEmpty()){
@@ -32,34 +31,28 @@ public class RetrieveRecord {
                     [4] By Name (Descending)""");
 
             userInput = Main.checkValidInput(validInput);
+            NameComparator nameComparator = new NameComparator();
 
             // If they've chosen 1
             if(Objects.equals(userInput, "1")){
                 Collections.sort(allRecords);
-                for (GundamModel record: allRecords) {
-                    System.out.println(record.toString() + "\n");
-                }
-                System.out.println("Finished, enter anything to return to the Main Menu.");
-                scanner.nextLine();
-                Main.returnToMainMenu();
+                printSortedList(allRecords);
             }
             // If they've chosen 2
             else if (Objects.equals(userInput, "2")) {
                 Collections.sort(allRecords);
                 Collections.reverse(allRecords);
-                for (GundamModel record: allRecords) {
-                    System.out.println(record.toString() + "\n");
-                }
-                System.out.println("Finished, enter anything to return to the Main Menu.");
-                scanner.nextLine();
-                Main.returnToMainMenu();
+                printSortedList(allRecords);
             }
             // If they've chosen 3
             else if (Objects.equals(userInput, "3")){
-
+                Collections.sort(allRecords, nameComparator);
+                printSortedList(allRecords);
             }
             // If they've chosen 4
             else{
+                Collections.sort(allRecords, nameComparator);
+                Collections.reverse(allRecords);
 
             }
         }
@@ -67,6 +60,17 @@ public class RetrieveRecord {
         return getAllModels();
 
     }
+
+    public static void printSortedList(ArrayList<GundamModel> allRecords){
+        Scanner scanner = new Scanner(System.in);
+        for (GundamModel record: allRecords) {
+            System.out.println(record.toString() + "\n");
+        }
+        System.out.println("Finished, enter anything to return to the Main Menu.");
+        scanner.nextLine();
+        Main.returnToMainMenu();
+    }
+
     public static void displayRecordsInner(){
         ArrayList<GundamModel> modelRecords = retrieveRecords();
         for (int i = 0; i < modelRecords.size(); i++) {
@@ -87,8 +91,7 @@ public class RetrieveRecord {
         try{
             FileInputStream fileInputStream = new FileInputStream("save.dat");
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            ArrayList<GundamModel> modelRecords = (ArrayList<GundamModel>)objectInputStream.readObject();
-            return modelRecords;
+            return (ArrayList<GundamModel>)objectInputStream.readObject();
         }
         catch(FileNotFoundException e){
             System.out.println("File not found.");
