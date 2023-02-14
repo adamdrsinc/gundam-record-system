@@ -31,10 +31,8 @@ public class EditRecord {
 
 
         // All properties of selected Gundam
-        String gundName = selectedModel.getModelName();
         GundamModel.Grade gundGrade = selectedModel.getGrade();
         GundamModel.Series gundSeries = selectedModel.getSeries();
-        String gundPrice = selectedModel.getReleasePrice();
 
         switch(chosenProperty){
 
@@ -42,7 +40,7 @@ public class EditRecord {
             // Chosen Name
             case "1" -> {
                 System.out.println("The current Name is " + selectedModel.getModelName() + ", what would you like to change it to?");
-                gundName = scanner.nextLine();
+                String gundName = scanner.nextLine();
                 selectedModel.setModelName(gundName);
                 CreateRecord.saveAllGundam(allModels);
 
@@ -116,7 +114,7 @@ public class EditRecord {
             // Chosen Price
             case "4" -> {
                 System.out.println("The current Price is " + selectedModel.getModelName() + ", what would you like to change it to?");
-                gundPrice = scanner.nextLine();
+                String gundPrice = scanner.nextLine();
                 selectedModel.setReleasePrice(gundPrice);
                 CreateRecord.saveAllGundam(allModels);
 

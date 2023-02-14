@@ -7,7 +7,6 @@ public class DeleteRecord {
     public static void deleteRecord(){
         Scanner scanner = new Scanner(System.in);
         String userInput = new String();
-        boolean whileBool = true;
 
         ArrayList<GundamModel> modelRecords = RetrieveRecord.getAllModels();
         Iterator<GundamModel> modelIterator = modelRecords.iterator();
