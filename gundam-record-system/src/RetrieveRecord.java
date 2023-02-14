@@ -5,9 +5,12 @@ import java.io.ObjectInputStream;
 import java.util.*;
 
 public class RetrieveRecord {
-    public static ArrayList<GundamModel> retrieveRecords(){
+
+    //ONLY sort the list.
+    public static void displaySortOption(){
         List<String> validInput = new ArrayList<>(Arrays.asList("1", "2", "3", "4"));
         ArrayList<GundamModel> allRecords = getAllModels();
+
 
         if(getAllModels().isEmpty()){
             System.out.println("No records exist, returning to Main Menu.");
@@ -53,38 +56,30 @@ public class RetrieveRecord {
             else{
                 Collections.sort(allRecords, nameComparator);
                 Collections.reverse(allRecords);
-
+                printSortedList(allRecords);
             }
+        } else{
+            printSortedList(allRecords);
         }
 
-        return getAllModels();
 
     }
 
-    public static void printSortedList(ArrayList<GundamModel> allRecords){
+    // Sort list AND return to Main Menu
+    public static void sortedListReturnToMM(){
         Scanner scanner = new Scanner(System.in);
-        for (GundamModel record: allRecords) {
-            System.out.println(record.toString() + "\n");
-        }
-        System.out.println("Finished, enter anything to return to the Main Menu.");
-        scanner.nextLine();
-        Main.returnToMainMenu();
-    }
-
-    public static void displayRecordsInner(){
-        ArrayList<GundamModel> modelRecords = retrieveRecords();
-        for (int i = 0; i < modelRecords.size(); i++) {
-            System.out.printf("Record %d:\n", i+1);
-            System.out.println(modelRecords.get(i) + "\n");
-        }
-    }
-
-    public static void displayRecords(){
-        Scanner scanner = new Scanner(System.in);
-        displayRecordsInner();
+        displaySortOption();
         System.out.println("Press enter to return to the main menu.");
         scanner.nextLine();
         Main.returnToMainMenu();
+    }
+
+    public static void printSortedList(ArrayList<GundamModel> allRecords) {
+        for (int i = 0; i < allRecords.size(); i++) {
+            System.out.println("Record " + (i+1));
+            System.out.println(allRecords.get(i).toString() + "\n");
+        }
+
     }
 
     public static ArrayList<GundamModel> getAllModels(){

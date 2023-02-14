@@ -70,13 +70,17 @@ public class CreateRecord {
             enterNewGundam(newRecords);
         }
         else{
-            saveAllGundamToRecords(newRecords);
+            saveAllGundamThenMM(newRecords);
         }
 
 
     }
-    public static void saveAllGundamToRecords(ArrayList<GundamModel> newModels){
+    public static void saveAllGundamThenMM(ArrayList<GundamModel> newModels){
+        saveAllGundam(newModels);
+        Main.returnToMainMenu();
+    }
 
+    public static void saveAllGundam(ArrayList<GundamModel> newModels){
         try{
             FileOutputStream fileOutputStream = new FileOutputStream("save.dat");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -96,6 +100,5 @@ public class CreateRecord {
             System.out.println(e.getMessage());
             Main.returnToMainMenu();
         }
-        Main.returnToMainMenu();
     }
 }

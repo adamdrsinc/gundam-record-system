@@ -1,48 +1,137 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class EditRecord {
 
     public static void editRecord(){
-        ArrayList<GundamModel> allModels = RetrieveRecord.retrieveRecords();
+        ArrayList<GundamModel> allModels = RetrieveRecord.getAllModels();
+        RetrieveRecord.printSortedList(allModels);
 
-        RetrieveRecord.displayRecordsInner();
-        int userInput = editRecordInner(allModels);
-        if(userInput == -1){
-            System.out.println("Error reached in editRecord.");
-        }
-
+        System.out.println("Enter the record number you wish to edit.");
+        int userInput = Integer.parseInt(DeleteRecord.checkInpDelRecord(allModels));
         GundamModel selectedModel = allModels.get(userInput-1);
         System.out.println(selectedModel.toString());
+
+        System.out.println("""
+                What property would you like to edit?
+                [1] Name
+                [2] Grade
+                [3] Series
+                [4] Price""");
+
+        String checkInpProperty = Main.checkValidInput(new ArrayList<>(Arrays.asList("1", "2", "3", "4")));
+
+        editProperty(checkInpProperty, selectedModel, allModels);
 
         System.out.println();
     }
 
-    public static int editRecordInner(ArrayList<GundamModel> allModels){
-        List<String> validInput = new ArrayList<>(Arrays.asList("1", "2"));
-        System.out.println("Please input the record number you wish to edit.");
-        int userInput = Integer.parseInt(DeleteRecord.checkInpDelRecord(allModels));
+    public static void editProperty(String chosenProperty, GundamModel selectedModel, ArrayList<GundamModel> allModels){
+        Scanner scanner = new Scanner(System.in);
+        List<String> validInput = new ArrayList<>(Arrays.asList("1", "2", "3", "4"));
 
-        GundamModel selectedModel = allModels.get(userInput-1);
 
-        System.out.println("Model selected:");
-        System.out.println(selectedModel.toString());
+        // All properties of selected Gundam
+        String gundName = selectedModel.getModelName();
+        GundamModel.Grade gundGrade = selectedModel.getGrade();
+        GundamModel.Series gundSeries = selectedModel.getSeries();
+        String gundPrice = selectedModel.getReleasePrice();
 
-        System.out.println("""
-        Is this correct?
-        [1] Yes
-        [2] No""");
+        switch(chosenProperty){
 
-        String isCorrect = Main.checkValidInput(validInput);
 
-        if (Objects.equals(isCorrect, "1")){
-            return userInput;
+            // Chosen Name
+            case "1" -> {
+                System.out.println("The current Name is " + selectedModel.getModelName() + ", what would you like to change it to?");
+                gundName = scanner.nextLine();
+                selectedModel.setModelName(gundName);
+                CreateRecord.saveAllGundam(allModels);
+
+                System.out.println("Record altered successfully. New Record:");
+                System.out.println(selectedModel.toString() + "\n");
+
+                System.out.println("Press enter to return to the Main Menu.");
+                scanner.nextLine();
+                Main.returnToMainMenu();
+
+            }
+
+            // Chosen Grade
+            case "2" -> {
+                System.out.println("The current Grade is " + selectedModel.getGrade() + ", what would you like to change it to?");
+                System.out.println("""
+                        [1] High Grade
+                        [2] Real Grade
+                        [3] Master Grade
+                        [4] Perfect Grade""");
+
+                String enteredGrade = Main.checkValidInput(validInput);
+                GundamModel.Grade newGrade = switch(enteredGrade){
+                  case "1" -> GundamModel.Grade.HIGH;
+                  case "2" -> GundamModel.Grade.REAL;
+                  case "3" -> GundamModel.Grade.MASTER;
+                  case "4" -> GundamModel.Grade.PERFECT;
+                  default -> gundGrade;
+                };
+
+                selectedModel.setGrade(newGrade);
+                CreateRecord.saveAllGundam(allModels);
+
+                System.out.println("Record altered successfully. New Record:");
+                System.out.println(selectedModel.toString() + "\n");
+
+                System.out.println("Press enter to return to the Main Menu.");
+                scanner.nextLine();
+                Main.returnToMainMenu();
+            }
+
+            // Chosen Series
+            case "3" -> {
+                System.out.println("The current Series is " + selectedModel.getSeries() + ", what would you like to change it to?");
+                System.out.println("""
+                        [1] Mobile Suit Gudam.
+                        [2] Mobile Suit Gundam: Thunderbolt.
+                        [3] Mobile Suit Gundam: Unicorn.
+                        [4] Mobile Suit Gundam: The Witch From Mercury""");
+
+                String enteredSeries = Main.checkValidInput(validInput);
+                GundamModel.Series newSeries = switch(enteredSeries){
+                    case "1" -> GundamModel.Series.MOBILE_SUIT_GUNDAM;
+                    case "2" -> GundamModel.Series.MSG_THUNDERBOLT;
+                    case "3" -> GundamModel.Series.MSG_UNICORN;
+                    case "4" -> GundamModel.Series.MSG_WitchFromMercury;
+                    default -> gundSeries;
+                };
+
+                selectedModel.setSeries(newSeries);
+                CreateRecord.saveAllGundam(allModels);
+
+                System.out.println("Record altered successfully. New Record:");
+                System.out.println(selectedModel.toString() + "\n");
+
+                System.out.println("Press enter to return to the Main Menu.");
+                scanner.nextLine();
+                Main.returnToMainMenu();
+            }
+
+            // Chosen Price
+            case "4" -> {
+                System.out.println("The current Price is " + selectedModel.getModelName() + ", what would you like to change it to?");
+                gundPrice = scanner.nextLine();
+                selectedModel.setReleasePrice(gundPrice);
+                CreateRecord.saveAllGundam(allModels);
+
+                System.out.println("Record altered successfully. New Record:");
+                System.out.println(selectedModel.toString() + "\n");
+
+                System.out.println("Press enter to return to the Main Menu.");
+                scanner.nextLine();
+                Main.returnToMainMenu();
+            }
+
+            default -> System.out.println("Invalid");
         }
-        else{
-            return editRecordInner(allModels);
-        }
+
     }
+
 
 }

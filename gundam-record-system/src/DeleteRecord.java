@@ -9,7 +9,7 @@ public class DeleteRecord {
         String userInput = new String();
         boolean whileBool = true;
 
-        ArrayList<GundamModel> modelRecords = RetrieveRecord.retrieveRecords();
+        ArrayList<GundamModel> modelRecords = RetrieveRecord.getAllModels();
         Iterator<GundamModel> modelIterator = modelRecords.iterator();
 
         if(modelRecords.isEmpty()){
@@ -33,7 +33,7 @@ public class DeleteRecord {
             }
         }
 
-        CreateRecord.saveAllGundamToRecords(modelRecords);
+        CreateRecord.saveAllGundamThenMM(modelRecords);
 
     }
     public static String checkInpDelRecord(ArrayList<GundamModel> modelRecords){

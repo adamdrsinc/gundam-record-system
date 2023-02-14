@@ -67,7 +67,7 @@ public class Main {
         }
         switch(userInput){
             case "1" -> CreateRecord.enterNewGundam(newModels);
-            case "2" -> RetrieveRecord.displayRecords();
+            case "2" -> RetrieveRecord.sortedListReturnToMM();
             case "3" -> DeleteRecord.deleteRecord();
             case "4" -> EditRecord.editRecord();
             case "6" -> quit();
