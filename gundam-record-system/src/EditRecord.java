@@ -7,6 +7,12 @@ public class EditRecord {
         RetrieveRecord.printSortedList(allModels);
 
         System.out.println("Enter the record number you wish to edit.");
+
+        //
+        // ADD SANITATION CHECK FOR INPUT TO ENSURE THAT USER CANNOT ENTER A RECORD NUMBER HIGHER THAN THE AMOUNT OF RECORDS IN SYSTEM
+        //
+
+
         int userInput = Integer.parseInt(DeleteRecord.checkInpDelRecord(allModels));
         GundamModel selectedModel = allModels.get(userInput-1);
         System.out.println(selectedModel.toString());

@@ -16,7 +16,9 @@ public class Main {
         );
 
         checkValidMMInput();
+
     }
+
 
     public static String checkValidInput(List<String> validInput){
         Scanner scanner = new Scanner(System.in);
