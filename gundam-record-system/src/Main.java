@@ -54,13 +54,12 @@ public class Main {
 
     public static void checkValidMMInput(){
         ArrayList<GundamModel> newModels = new ArrayList<>();
-        List<String> validInputs = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "6"));
         Scanner scanner = new Scanner(System.in);
         String userInput;
         while (true) {
             System.out.println();
             userInput = scanner.nextLine();
-            if (!validInputs.contains(userInput)) {
+            if (!globalUsage.getValidMMInputsAL().contains(userInput)) {
                 System.out.println("Invalid input, try again.");
             } else {
 

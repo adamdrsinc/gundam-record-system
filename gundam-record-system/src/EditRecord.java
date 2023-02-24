@@ -6,14 +6,25 @@ public class EditRecord {
         ArrayList<GundamModel> allModels = RetrieveRecord.getAllModels();
         RetrieveRecord.printSortedList(allModels);
 
-        System.out.println("Enter the record number you wish to edit.");
+        System.out.println("""
+        Enter the record number you wish to edit.
+        Type in "-1" to cancel at any point and return to the main menu.""");
 
-        //
-        // ADD SANITATION CHECK FOR INPUT TO ENSURE THAT USER CANNOT ENTER A RECORD NUMBER HIGHER THAN THE AMOUNT OF RECORDS IN SYSTEM
-        //
+        int userInput;
 
+        while(true){
+            userInput = Integer.parseInt(DeleteRecord.checkInpDelRecord(allModels));
+            if(userInput == -1){
+                Main.returnToMainMenu();
+            }
+            if(userInput > (allModels.size()) || userInput < 1){
+                System.out.println(allModels.size());
+                System.out.println("Please enter a valid record number between the stated parameters.");
+            }else{
+                break;
+            }
+        }
 
-        int userInput = Integer.parseInt(DeleteRecord.checkInpDelRecord(allModels));
         GundamModel selectedModel = allModels.get(userInput-1);
         System.out.println(selectedModel.toString());
 
@@ -24,7 +35,7 @@ public class EditRecord {
                 [3] Series
                 [4] Price""");
 
-        String checkInpProperty = Main.checkValidInput(new ArrayList<>(Arrays.asList("1", "2", "3", "4")));
+        String checkInpProperty = Main.checkValidInput(globalUsage.getValid4InputsAL());
 
         editProperty(checkInpProperty, selectedModel, allModels);
 
@@ -33,8 +44,6 @@ public class EditRecord {
 
     public static void editProperty(String chosenProperty, GundamModel selectedModel, ArrayList<GundamModel> allModels){
         Scanner scanner = new Scanner(System.in);
-        List<String> validInput = new ArrayList<>(Arrays.asList("1", "2", "3", "4"));
-
 
         // All properties of selected Gundam
         GundamModel.Grade gundGrade = selectedModel.getGrade();
@@ -68,7 +77,7 @@ public class EditRecord {
                         [3] Master Grade
                         [4] Perfect Grade""");
 
-                String enteredGrade = Main.checkValidInput(validInput);
+                String enteredGrade = Main.checkValidInput(globalUsage.getValid4InputsAL());
                 GundamModel.Grade newGrade = switch(enteredGrade){
                   case "1" -> GundamModel.Grade.HIGH;
                   case "2" -> GundamModel.Grade.REAL;
@@ -97,7 +106,7 @@ public class EditRecord {
                         [3] Mobile Suit Gundam: Unicorn.
                         [4] Mobile Suit Gundam: The Witch From Mercury""");
 
-                String enteredSeries = Main.checkValidInput(validInput);
+                String enteredSeries = Main.checkValidInput(globalUsage.getValid4InputsAL());
                 GundamModel.Series newSeries = switch(enteredSeries){
                     case "1" -> GundamModel.Series.MOBILE_SUIT_GUNDAM;
                     case "2" -> GundamModel.Series.MSG_THUNDERBOLT;
@@ -120,7 +129,8 @@ public class EditRecord {
             // Chosen Price
             case "4" -> {
                 System.out.println("The current Price is " + selectedModel.getModelName() + ", what would you like to change it to?");
-                String gundPrice = scanner.nextLine();
+                String gundPrice = CreateRecord.checkIfPriceIsDouble();
+
                 selectedModel.setReleasePrice(gundPrice);
                 CreateRecord.saveAllGundam(allModels);
 

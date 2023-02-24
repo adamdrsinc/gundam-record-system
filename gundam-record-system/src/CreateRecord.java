@@ -8,7 +8,6 @@ public class CreateRecord {
     public static void enterNewGundam(ArrayList<GundamModel> newRecords) {
         Scanner scanner = new Scanner(System.in);
 
-        List<String> validInput = new ArrayList<>(Arrays.asList("1", "2", "3", "4"));
         GundamModel.Grade newGrade;
         GundamModel.Series newSeries;
 
@@ -27,7 +26,7 @@ public class CreateRecord {
                 [3] Master Grade.
                 [4] Perfect Grade.""");
 
-        String tempGrade = Main.checkValidInput(validInput);
+        String tempGrade = Main.checkValidInput(globalUsage.getValid4InputsAL());
 
         newGrade = switch(tempGrade){
             case "1" -> GundamModel.Grade.HIGH;
@@ -43,7 +42,7 @@ public class CreateRecord {
                 [3] Mobile Suit Gundam: Unicorn.
                 [4] Mobile Suit Gundam: The Witch From Mercury""");
 
-        String tempSeries = Main.checkValidInput(validInput);
+        String tempSeries = Main.checkValidInput(globalUsage.getValid4InputsAL());
 
         newSeries = switch(tempSeries){
             case "1" -> GundamModel.Series.MOBILE_SUIT_GUNDAM;
@@ -53,7 +52,8 @@ public class CreateRecord {
         };
 
         System.out.println("Enter the Price:");
-        String newPrice = scanner.nextLine();
+        String newPrice = checkIfPriceIsDouble();
+
         if(Objects.equals(newPrice, "-1")){Main.returnToMainMenu();}
 
         GundamModel newGundamModel = new GundamModel(newName, newPrice, newGrade, newSeries);
@@ -75,6 +75,22 @@ public class CreateRecord {
 
 
     }
+
+    public static String checkIfPriceIsDouble() {
+        Scanner scanner = new Scanner(System.in);
+        String newPrice;
+        while(true){
+            newPrice = scanner.nextLine();
+            try{
+                Double.parseDouble(newPrice.trim());
+                return newPrice;
+            }
+            catch(NumberFormatException e){
+                System.out.println("Enter a number.\n");
+            }
+        }
+    }
+
     public static void saveAllGundamThenMM(ArrayList<GundamModel> newModels){
         saveAllGundam(newModels);
         Main.returnToMainMenu();

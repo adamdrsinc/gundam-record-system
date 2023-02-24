@@ -8,7 +8,6 @@ public class RetrieveRecord {
 
     //ONLY sort the list.
     public static void displaySortOption(){
-        List<String> validInput = new ArrayList<>(Arrays.asList("1", "2", "3", "4"));
         ArrayList<GundamModel> allRecords = getAllModels();
 
 
@@ -33,7 +32,7 @@ public class RetrieveRecord {
                     [3] By Name (Ascending)
                     [4] By Name (Descending)""");
 
-            userInput = Main.checkValidInput(validInput);
+            userInput = Main.checkValidInput(globalUsage.getValid4InputsAL());
             NameComparator nameComparator = new NameComparator();
 
             // If they've chosen 1

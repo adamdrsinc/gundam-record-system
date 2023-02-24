@@ -40,8 +40,9 @@ public class DeleteRecord {
 
         while(true){
             String userInput = scanner.nextLine();
-            if(userInput.matches("[0-9]+")){
-                if(Integer.parseInt(userInput) >= 1 || Integer.parseInt(userInput) <= modelRecords.size()){
+            if(userInput.matches("[-1-9]+")){
+                int parsedIntUserInput = Integer.parseInt(userInput);
+                if(parsedIntUserInput >= 1 || parsedIntUserInput <= modelRecords.size() || parsedIntUserInput == -1){
                     return userInput;
                 }
             }
