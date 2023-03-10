@@ -11,7 +11,7 @@ public class RetrieveRecord {
         ArrayList<GundamModel> allRecords = getAllModels();
 
 
-        if(getAllModels().isEmpty()){
+        if(allRecords.isEmpty()){
             System.out.println("No records exist, returning to Main Menu.");
             Main.returnToMainMenu();
         }
