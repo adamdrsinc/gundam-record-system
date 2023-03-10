@@ -42,8 +42,10 @@ public class DeleteRecord {
             String userInput = scanner.nextLine();
             if(userInput.matches("[-1-9]+")){
                 int parsedIntUserInput = Integer.parseInt(userInput);
-                if(parsedIntUserInput >= 1 || parsedIntUserInput <= modelRecords.size() || parsedIntUserInput == -1){
-                    return userInput;
+                if(parsedIntUserInput >= 1 || parsedIntUserInput == -1){
+                    if(parsedIntUserInput <= modelRecords.size()){
+                        return userInput;
+                    }
                 }
             }
             System.out.printf("Please input only valid inputs between 1-%d.\n", modelRecords.size());

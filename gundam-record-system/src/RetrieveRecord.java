@@ -32,7 +32,7 @@ public class RetrieveRecord {
                     [3] By Name (Ascending)
                     [4] By Name (Descending)""");
 
-            userInput = Main.checkValidInput(globalUsage.getValid4InputsAL());
+            userInput = Main.checkValidInput(Constants.VALID_4_INPUTS_AL);
             NameComparator nameComparator = new NameComparator();
 
             // If they've chosen 1

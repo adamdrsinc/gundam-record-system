@@ -26,7 +26,7 @@ public class CreateRecord {
                 [3] Master Grade.
                 [4] Perfect Grade.""");
 
-        String tempGrade = Main.checkValidInput(globalUsage.getValid4InputsAL());
+        String tempGrade = Main.checkValidInput(Constants.VALID_4_INPUTS_AL);
 
         newGrade = switch(tempGrade){
             case "1" -> GundamModel.Grade.HIGH;
@@ -42,7 +42,7 @@ public class CreateRecord {
                 [3] Mobile Suit Gundam: Unicorn.
                 [4] Mobile Suit Gundam: The Witch From Mercury""");
 
-        String tempSeries = Main.checkValidInput(globalUsage.getValid4InputsAL());
+        String tempSeries = Main.checkValidInput(Constants.VALID_4_INPUTS_AL);
 
         newSeries = switch(tempSeries){
             case "1" -> GundamModel.Series.MOBILE_SUIT_GUNDAM;
