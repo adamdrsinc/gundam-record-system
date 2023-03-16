@@ -62,20 +62,7 @@ public class EditRecord {
         GundamModel.Grade gundGrade = selectedModel.getGrade();
         Scanner scanner = new Scanner(System.in);
         System.out.println("The current Grade is " + selectedModel.getGrade() + ", what would you like to change it to?");
-        System.out.println("""
-                        [1] High Grade
-                        [2] Real Grade
-                        [3] Master Grade
-                        [4] Perfect Grade""");
-
-        String enteredGrade = Main.checkValidInput(Constants.VALID_4_INPUTS_AL);
-        GundamModel.Grade newGrade = switch(enteredGrade){
-            case "1" -> GundamModel.Grade.HIGH;
-            case "2" -> GundamModel.Grade.REAL;
-            case "3" -> GundamModel.Grade.MASTER;
-            case "4" -> GundamModel.Grade.PERFECT;
-            default -> gundGrade;
-        };
+        GundamModel.Grade newGrade = CreateRecord.getNewGrade();
 
         selectedModel.setGrade(newGrade);
         CreateRecord.saveAllGundam(allModels);
@@ -89,25 +76,12 @@ public class EditRecord {
     }
 
     public static void editPropertySeries(GundamModel selectedModel, ArrayList<GundamModel> allModels){
-        GundamModel.Series gundSeries = selectedModel.getSeries();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("The current Series is " + selectedModel.getSeries() + ", what would you like to change it to?");
-        System.out.println("""
-                        [1] Mobile Suit Gudam.
-                        [2] Mobile Suit Gundam: Thunderbolt.
-                        [3] Mobile Suit Gundam: Unicorn.
-                        [4] Mobile Suit Gundam: The Witch From Mercury""");
 
-        String enteredSeries = Main.checkValidInput(Constants.VALID_4_INPUTS_AL);
-        GundamModel.Series newSeries = switch(enteredSeries){
-            case "1" -> GundamModel.Series.MOBILE_SUIT_GUNDAM;
-            case "2" -> GundamModel.Series.MSG_THUNDERBOLT;
-            case "3" -> GundamModel.Series.MSG_UNICORN;
-            case "4" -> GundamModel.Series.MSG_WitchFromMercury;
-            default -> gundSeries;
-        };
+        System.out.println("The current Grade is " + selectedModel.getSeries() + ", what would you like to change it to?");
+        GundamModel.Series enteredSeries = CreateRecord.getNewSeries();
 
-        selectedModel.setSeries(newSeries);
+        selectedModel.setSeries(enteredSeries);
         CreateRecord.saveAllGundam(allModels);
 
         System.out.println("Record altered successfully. New Record:");

@@ -4,6 +4,24 @@ import java.util.Arrays;
 import java.util.List;
 
 public class GundamModel implements Serializable, Comparable<GundamModel>{
+
+    // INFORMATION ABOUT WHAT A GUNDAM IS FOR THE EXAMINER
+    /*
+    A Gundam Model is a Japanese model which can be built from a model kit.
+    These model kits have specific grades, from easiest to most difficult.
+    The ranking order from easiest to hardest are as follows:
+    1. High Grade
+    2. Real Grade
+    3. Master Grade
+    4. Perfect Grade
+
+    These, for the purposes of this assignment, have been replaced with the following:
+    Easy, Medium, Hard, Extreme,
+    As it is unknwon if the examiner knows of what these model kits are.
+
+    The "Series" tag refers to which series they come from, as there are many different series.
+    */
+
     private String modelName;
     private String releasePrice;
     private Grade grade;
@@ -16,12 +34,12 @@ public class GundamModel implements Serializable, Comparable<GundamModel>{
         return grade.compareTo(o.grade);
     }
 
-    List<String> gradesAsStrings = new ArrayList<>(Arrays.asList("High Grade", "Real Grade", "Master Grade", "Perfect Grade"));
-    List<String> seriesAsStrings = new ArrayList<>(Arrays.asList("Mobile Suit Gundam", "Mobile Suit Gundam: Thunderbolt",
+    public final List<String> GRADES_AS_STRINGS = new ArrayList<>(Arrays.asList("Easy", "Medium", "Hard", "Extreme"));
+    public final List<String> SERIES_AS_STRINGS = new ArrayList<>(Arrays.asList("Mobile Suit Gundam", "Mobile Suit Gundam: Thunderbolt",
             "Mobile Suit Gundam: Unicorn", "Mobile Suit Gundam: Witch From Mercury"));
 
     public enum Grade{
-        HIGH, REAL, MASTER, PERFECT
+        EASY, MEDIUM, HARD, EXTREME
     }
 
     public enum Series{
@@ -51,8 +69,8 @@ public class GundamModel implements Serializable, Comparable<GundamModel>{
     public String toString() {
         return  "Model: " + modelName + '\n' +
                 "Price: " + releasePrice + '\n' +
-                "Grade: " + gradesAsStrings.get(grade.ordinal()) + "\n" +
-                "Series: " + seriesAsStrings.get(series.ordinal());
+                "Grade: " + GRADES_AS_STRINGS.get(grade.ordinal()) + "\n" +
+                "Series: " + SERIES_AS_STRINGS.get(series.ordinal());
     }
 }
 

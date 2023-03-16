@@ -32,9 +32,20 @@ public class DeleteRecord {
             }
         }
 
-        CreateRecord.saveAllGundamThenMM(modelRecords);
+        CreateRecord.saveAllGundam(modelRecords);
+        System.out.println("--Model list updated--");
+        for (int i = 0; i < modelRecords.size(); i++) {
+            System.out.printf("Record %d: ", i+1);
+            System.out.println(modelRecords.get(i) + "\n");
+        }
+        System.out.println("Press enter to return to the main menu.");
+        scanner.nextLine();
+
+        Main.returnToMainMenu();
 
     }
+
+    //Checks to see if the user has input a number that corresponds to a record.
     public static String checkInpDelRecord(ArrayList<GundamModel> modelRecords){
         Scanner scanner = new Scanner(System.in);
 

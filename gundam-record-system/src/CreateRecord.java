@@ -8,9 +8,6 @@ public class CreateRecord {
     public static void enterNewGundam(ArrayList<GundamModel> newRecords) {
         Scanner scanner = new Scanner(System.in);
 
-        GundamModel.Grade newGrade;
-        GundamModel.Series newSeries;
-
         System.out.println("""
                 -- Entering a new Gundam --
                 Enter "-1" at any point to quit to the main menu.""");
@@ -18,37 +15,11 @@ public class CreateRecord {
         System.out.println("Enter the Name:");
         String newName = CreateRecord.checkIfNameIsValid();
 
-        System.out.println("Enter the Grade");
-        System.out.println("""
-                [1] High Grade.
-                [2] Real Grade.
-                [3] Master Grade.
-                [4] Perfect Grade.""");
+        System.out.println("Enter the new Grade");
+        GundamModel.Grade newGrade = CreateRecord.getNewGrade();
 
-        String tempGrade = Main.checkValidInput(Constants.VALID_4_INPUTS_AL);
-
-        newGrade = switch(tempGrade){
-            case "1" -> GundamModel.Grade.HIGH;
-            case "2" -> GundamModel.Grade.REAL;
-            case "3" -> GundamModel.Grade.MASTER;
-            default -> GundamModel.Grade.PERFECT;
-        };
-
-        System.out.println("Enter the Series");
-        System.out.println("""
-                [1] Mobile Suit Gudam.
-                [2] Mobile Suit Gundam: Thunderbolt.
-                [3] Mobile Suit Gundam: Unicorn.
-                [4] Mobile Suit Gundam: The Witch From Mercury""");
-
-        String tempSeries = Main.checkValidInput(Constants.VALID_4_INPUTS_AL);
-
-        newSeries = switch(tempSeries){
-            case "1" -> GundamModel.Series.MOBILE_SUIT_GUNDAM;
-            case "2" -> GundamModel.Series.MSG_THUNDERBOLT;
-            case "3" -> GundamModel.Series.MSG_UNICORN;
-            default -> GundamModel.Series.MSG_WitchFromMercury;
-        };
+        System.out.println("Enter the new Series");
+        GundamModel.Series newSeries = CreateRecord.getNewSeries();
 
         System.out.println("Enter the Price:");
         String newPrice = checkIfPriceIsValid();
@@ -67,12 +38,46 @@ public class CreateRecord {
             enterNewGundam(newRecords);
         }
         else{
-            saveAllGundamThenMM(newRecords);
+            saveAllGundam(newRecords);
+            Main.returnToMainMenu();
         }
 
 
     }
 
+    public static GundamModel.Grade getNewGrade(){
+        System.out.println("""
+                [1] Easy.
+                [2] Medium.
+                [3] Hard.
+                [4] Extreme.""");
+
+        String tempGrade = Main.checkValidInput(Constants.VALID_4_INPUTS_AL);
+
+        return switch(tempGrade){
+            case "1" -> GundamModel.Grade.EASY;
+            case "2" -> GundamModel.Grade.MEDIUM;
+            case "3" -> GundamModel.Grade.HARD;
+            default -> GundamModel.Grade.EXTREME;
+        };
+    }
+
+    public static GundamModel.Series getNewSeries(){
+        System.out.println("""
+                [1] Mobile Suit Gundam.
+                [2] Mobile Suit Gundam: Thunderbolt.
+                [3] Mobile Suit Gundam: Unicorn.
+                [4] Mobile Suit Gundam: The Witch From Mercury""");
+
+        String tempSeries = Main.checkValidInput(Constants.VALID_4_INPUTS_AL);
+
+        return switch(tempSeries){
+            case "1" -> GundamModel.Series.MOBILE_SUIT_GUNDAM;
+            case "2" -> GundamModel.Series.MSG_THUNDERBOLT;
+            case "3" -> GundamModel.Series.MSG_UNICORN;
+            default -> GundamModel.Series.MSG_WitchFromMercury;
+        };
+    }
     public static String checkIfNameIsValid(){
         Scanner scanner = new Scanner(System.in);
         String newName;
@@ -91,7 +96,12 @@ public class CreateRecord {
         Scanner scanner = new Scanner(System.in);
         String newPrice;
         while(true){
-            newPrice = scanner.nextLine();
+
+            //Obtains input from user and then removes any leading 0's.
+            //Code adapted from Polygenelubricants, 2010
+            newPrice = scanner.nextLine().replaceFirst("^0+(?!$)", "");
+            //End of adapted code.
+
             if(Objects.equals(newPrice, "-1")){
                 Main.returnToMainMenu();
             }
@@ -106,11 +116,6 @@ public class CreateRecord {
                 System.out.println("Enter a number.\n");
             }
         }
-    }
-
-    public static void saveAllGundamThenMM(ArrayList<GundamModel> newModels){
-        saveAllGundam(newModels);
-        Main.returnToMainMenu();
     }
 
     public static void saveAllGundam(ArrayList<GundamModel> newModels){

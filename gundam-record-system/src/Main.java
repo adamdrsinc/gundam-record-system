@@ -6,14 +6,7 @@ public class Main {
         System.out.println("| Welcome to the Gundam Model Database |");
         System.out.println("----------------------------------------");
         System.out.println("What would you like to do?:");
-        System.out.println(
-                """
-                        [1] Create a new records (This will overwrite previously entered data.)
-                        [2] Retrieve current records.
-                        [3] Delete a record.
-                        [4] Edit properties of a record.
-                        [6] Quit."""
-        );
+        displayMainMenu();
 
         checkValidMMInput();
 
@@ -40,6 +33,12 @@ public class Main {
     public static void returnToMainMenu() {
 
         System.out.println("\nReturned to the main menu.");
+        displayMainMenu();
+
+        checkValidMMInput();
+    }
+
+    public static void displayMainMenu(){
         System.out.println(
                 """
                         [1] Create a new record (This will overwrite previously entered data.)
@@ -48,10 +47,9 @@ public class Main {
                         [4] Edit properties of a record.
                         [6] Quit."""
         );
-
-        checkValidMMInput();
     }
 
+    //Checks input pertaining to the Main Menu
     public static void checkValidMMInput(){
         ArrayList<GundamModel> newModels = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);

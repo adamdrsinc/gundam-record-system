@@ -7,7 +7,7 @@ public class CheckAccessorsAndMutators {
         GundamModel testModel = new GundamModel(
                 "Gundam",
                 "29.99",
-                GundamModel.Grade.HIGH,
+                GundamModel.Grade.EASY,
                 GundamModel.Series.MSG_UNICORN
         );
 
@@ -29,7 +29,7 @@ public class CheckAccessorsAndMutators {
     @Test
     void checkModelGradeAccessor(){
         GundamModel model1 = getModel();
-        Assertions.assertEquals(GundamModel.Grade.HIGH, model1.getGrade());
+        Assertions.assertEquals(GundamModel.Grade.EASY, model1.getGrade());
     }
 
     @Test
@@ -55,8 +55,8 @@ public class CheckAccessorsAndMutators {
     @Test
     void checkModelGradeMutator(){
         GundamModel model1 = getModel();
-        model1.setGrade(GundamModel.Grade.MASTER);
-        Assertions.assertEquals(GundamModel.Grade.MASTER, model1.getGrade());
+        model1.setGrade(GundamModel.Grade.HARD);
+        Assertions.assertEquals(GundamModel.Grade.HARD, model1.getGrade());
     }
 
     @Test

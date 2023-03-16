@@ -86,6 +86,7 @@ public class RetrieveRecord {
             FileInputStream fileInputStream = new FileInputStream("save.dat");
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             return (ArrayList<GundamModel>)objectInputStream.readObject();
+
         }
         catch(FileNotFoundException e){
             System.out.println("File not found.");
@@ -93,9 +94,11 @@ public class RetrieveRecord {
         }
         catch(IOException e){
             System.out.println("Error converting data to object: " + e.getMessage());
+            Main.returnToMainMenu();
         }
         catch(ClassNotFoundException e){
             System.out.println("Class not found exception: " + e.getMessage());
+            Main.returnToMainMenu();
         }
         return new ArrayList<GundamModel>();
     }
