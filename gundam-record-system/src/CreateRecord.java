@@ -16,8 +16,7 @@ public class CreateRecord {
                 Enter "-1" at any point to quit to the main menu.""");
 
         System.out.println("Enter the Name:");
-        String newName = scanner.nextLine();
-        if(Objects.equals(newName, "-1")){Main.returnToMainMenu();}
+        String newName = CreateRecord.checkIfNameIsValid();
 
         System.out.println("Enter the Grade");
         System.out.println("""
@@ -52,9 +51,7 @@ public class CreateRecord {
         };
 
         System.out.println("Enter the Price:");
-        String newPrice = checkIfPriceIsDouble();
-
-        if(Objects.equals(newPrice, "-1")){Main.returnToMainMenu();}
+        String newPrice = checkIfPriceIsValid();
 
         GundamModel newGundamModel = new GundamModel(newName, newPrice, newGrade, newSeries);
         System.out.println("You entered:");
@@ -76,14 +73,34 @@ public class CreateRecord {
 
     }
 
-    public static String checkIfPriceIsDouble() {
+    public static String checkIfNameIsValid(){
+        Scanner scanner = new Scanner(System.in);
+        String newName;
+        while(true){
+            newName = scanner.nextLine();
+            if(Objects.equals(newName, "-1")){Main.returnToMainMenu();}
+            if(newName.isEmpty()){
+                System.out.println("Name cannot be empty. Enter a new name:");
+            }else{
+                return newName;
+            }
+        }
+
+    }
+    public static String checkIfPriceIsValid() {
         Scanner scanner = new Scanner(System.in);
         String newPrice;
         while(true){
             newPrice = scanner.nextLine();
+            if(Objects.equals(newPrice, "-1")){
+                Main.returnToMainMenu();
+            }
             try{
                 Double.parseDouble(newPrice.trim());
-                return newPrice;
+                if(Double.parseDouble(newPrice.trim()) > 0){
+                    return newPrice;
+                }
+                System.out.println("Enter a positive number.");
             }
             catch(NumberFormatException e){
                 System.out.println("Enter a number.\n");

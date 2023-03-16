@@ -23,7 +23,7 @@ public class DeleteRecord {
         }
 
         System.out.printf("Enter a corresponding record number to delete (1-%d):\n", modelRecords.size());
-
+        System.out.println("Or enter '-1' to return to the main menu.");
         userInput = checkInpDelRecord(modelRecords);
         for (int i = 0; i < modelRecords.size(); i++) {
             modelIterator.next();

@@ -59,10 +59,10 @@ public class Main {
         while (true) {
             System.out.println();
             userInput = scanner.nextLine();
+            if(Objects.equals(userInput, "-1")){Main.returnToMainMenu();}
             if (!Constants.VALID_MM_INPUTS_AL.contains(userInput)) {
                 System.out.println("Invalid input, try again.");
             } else {
-
                 break;
             }
         }

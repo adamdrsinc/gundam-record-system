@@ -46,7 +46,7 @@ public class EditRecord {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("The current Name is " + selectedModel.getModelName() + ", what would you like to change it to?");
-        String gundName = scanner.nextLine();
+        String gundName = CreateRecord.checkIfNameIsValid();
         selectedModel.setModelName(gundName);
         CreateRecord.saveAllGundam(allModels);
 
@@ -120,8 +120,8 @@ public class EditRecord {
 
     public static void editPropertyPrice(GundamModel selectedModel, ArrayList<GundamModel> allModels){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("The current Price is " + selectedModel.getModelName() + ", what would you like to change it to?");
-        String gundPrice = CreateRecord.checkIfPriceIsDouble();
+        System.out.println("The current Price is " + selectedModel.getReleasePrice() + ", what would you like to change it to?");
+        String gundPrice = CreateRecord.checkIfPriceIsValid();
 
         selectedModel.setReleasePrice(gundPrice);
         CreateRecord.saveAllGundam(allModels);

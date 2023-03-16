@@ -52,7 +52,7 @@ public class GundamModel implements Serializable, Comparable<GundamModel>{
         return  "Model: " + modelName + '\n' +
                 "Price: " + releasePrice + '\n' +
                 "Grade: " + gradesAsStrings.get(grade.ordinal()) + "\n" +
-                "Series: " + seriesAsStrings.get(grade.ordinal());
+                "Series: " + seriesAsStrings.get(series.ordinal());
     }
 }
 
